@@ -2,6 +2,6 @@ Get-ChildItem -Directory | ForEach-Object {
     $size = (Get-ChildItem $_.FullName -File -Recurse | Measure-Object Length -Sum).Sum / 1GB
     [PSCustomObject]@{
         FolderName = $_.Name
-        Size = "{0:N2} GB" -f $size
+        Size = '{0:N2} GB' -f $size -replace ',', '.'
     }
-} | Sort-Object -Property Size -Descending | Format-Table -AutoSize
+} | Sort-Object -Property { [double]($_.Size -replace ' GB') } -Descending | Format-Table -AutoSize
