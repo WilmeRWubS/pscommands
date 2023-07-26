@@ -1,0 +1,1 @@
+du -h --max-depth=1 | grep -E '^[0-9.]+[MG]' | sed -E 's/M$/ MB/' | sed -E 's/G$/ GB/' | sort -rh
